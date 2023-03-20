@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer base {
+  :root {
+    --nc-bg-color: #FFFFFF;
+  }
+  #neroConsent {
+    @apply w-full fixed bottom-0 bg-white;
+    box-shadow: 0 0 20px rgba(0,0,0,.2);
+  }
+}
