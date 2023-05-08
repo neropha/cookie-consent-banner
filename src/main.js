@@ -1,5 +1,24 @@
 import { createApp } from 'vue'
-import './style.css'
+import VueCookies from 'vue-cookies'
+import './main.css'
 import App from './App.vue'
 
-createApp(App).mount('#neroConsent')
+
+export default class NccbComponent {
+    FirstName = null;
+    LastName = "";x
+
+    // constructor(customSettings) {
+    //     this.settings = customSettings;
+    // }
+    // init() {
+    //     document.app = createApp(App)
+    //         .use(VueCookies, { expires: '1y' })
+    //         .mount('#ncc-banner');
+    // }
+}
+// https://orestbida.com/demo-projects/cookieconsent/
+
+document.app = createApp(App)
+    .use(VueCookies, { expires: '1y' })
+    .mount('#ncc-banner');

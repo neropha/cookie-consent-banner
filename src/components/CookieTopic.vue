@@ -1,41 +1,52 @@
-<script setup>
-import { ref } from 'vue'
+<script>
+import { cookieStore } from "@/store/cookie.store.js";
 
-defineProps({
-  headline: String,
-  checked: Boolean,
-  disabled: Boolean
-})
-
-const count = ref(0)
+export default {
+  props: {
+    category: {},
+    cat: String,
+  },
+  data() {
+    return {
+      values: cookieStore.getValues(),
+    };
+  },
+  mounted() {
+    cookieStore.setValue({ [this.cat]: this.category.checked });
+  },
+  methods: {
+    collect(event) {
+      if (event) {
+        cookieStore.setValue({ [this.cat]: event.target.checked });
+      }
+    },
+  },
+};
 </script>
 
 <template>
-  <!-- <h1>{{ msg }}</h1> -->
-
-  <!-- <div class="card">
-        <button type="button" @click="count++">count is {{ count }}</button>
-      </div> -->
-
   <section class="topic">
-    <label class="topic__toggle" for="nccb__cb0">
-      <span class="topic__label">{{ headline }}</span>
-      <input id="nccb__cb0" type="checkbox" :checked=checked :disabled=disabled>
+    <label class="topic__toggle" :for="cat">
+      <span class="topic__label">{{ category.headline }}</span>
+      <input :id="cat" type="checkbox" :checked="category.checked" :disabled="category.disabled" @click="collect" />
     </label>
-    <p class="topic__desc">Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum.</p>
+    <p v-if="category.description" class="topic__desc">{{ category.description }}</p>
   </section>
 </template>
 
-<style scoped>
+<style>
 .topic {
   @apply flex flex-col gap-2 border-t border-gray-light py-3;
 }
+
 .topic__toggle {
   @apply flex justify-between;
 }
+
 .topic__label {
   @apply text-base;
 }
+
 .topic__desc {
   @apply text-sm;
 }
